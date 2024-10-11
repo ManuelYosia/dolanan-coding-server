@@ -14,28 +14,34 @@ function validateForm($namaDepan, $namaBelakang, $username, $email, $password, $
 
     $result = $conn->query($sql1);
 
+    // Assoc array to store response (username_status, email_status)
+    $response = [];
+
     // Tell user if username or email already taken.
     if($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             if ($row['username'] === $username) {
-                echo "Username sudah digunakan.";
+                $response["usernameStatus"] = "taken";
             } 
             if ($row['email'] === $email) {
-                echo "Email sudah digunakan.";
+                $response["emailStatus"] = "taken";
             }
         }
+
     } else {
         //Insert data 
         $sql2 = "INSERT INTO users(username, email, password, nama_depan, nama_belakang, poin, level, map) VALUES ('{$username}','{$email}','{$password}','{$namaDepan}','{$namaBelakang}', 0, 1, 1)";
         
         if($conn->query($sql2) === TRUE) {
-            echo "New record created successfully";
+            $response["status"] = "success";
+
+            
         } else {
             echo "Error: ". $sql2 . "<br>" . $conn->error;
         }
     }
 
-    
+    echo json_encode($response);
 }
 
 validateForm($namaDepan, $namaBelakang, $username, $email, $password, $conn);
