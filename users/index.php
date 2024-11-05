@@ -23,7 +23,7 @@ $response = [];
 
 if($accessToken === session_id()) {
     $getUserResult = getUser($email, $conn);
-    $response["status"] = false;
+    $response["status"] = true;
     $response["data"] = $getUserResult;
     
     echo json_encode($response);
