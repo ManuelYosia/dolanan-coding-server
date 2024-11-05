@@ -50,8 +50,9 @@ function login($email, $password, $conn) {
             $response = $validateFormResult;
 
             $response["accessToken"] = $accessToken; 
+            $response["email"] = $email;
 
-            header("location: index.php");
+            //header("location: index.php");
         } else {
             $response["status"] = false;
             $response["messages"] = "Email atau password tidak sesuai";
@@ -67,12 +68,10 @@ function validateForm($email, $password) {
 
     if($email === "") {
         $result["status"] = false;
-        $result["messages"]["errorEmail"] = "Email tidak boleh kosong";
     } 
 
     if($password === "") {
         $result["status"] = false;
-        $result["messages"]["errorPassword"] = "Password tidak boleh kosong";
     }
 
     if($email !== "" && $password !== "") {

@@ -99,27 +99,22 @@ function validateForm($namaDepan, $namaBelakang, $username, $email, $password) {
 
     if($namaDepan === "") {
         $result["status"] = false;
-        $result["messages"]["errorNamaDepan"] = "Nama depan tidak boleh kosong";
     } 
 
     if($namaBelakang === "") {
         $result["status"] = false;
-        $result["messages"]["errorNamaBelakang"] = "Nama belakang tidak boleh kosong";
     }
 
     if($username === "") {
         $result["status"] = false;
-        $result["messages"]["errorUsername"] = "Username tidak boleh kosong";
     } 
 
     if($email === "") {
         $result["status"] = false;
-        $result["messages"]["errorEmail"] = "Email tidak boleh kosong";
     } 
 
     if($password === "") {
         $result["status"] = false;
-        $result["messages"]["errorPassword"] = "Password tidak boleh kosong";
     }
 
     if($namaDepan !== "" && $namaBelakang !=="" && $username !== "" && $email !== "" && $password !== "") {

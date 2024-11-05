@@ -23,13 +23,13 @@ $response = [];
 
 if($accessToken === session_id()) {
     $getUserResult = getUser($email, $conn);
+    $response["status"] = false;
+    $response["data"] = $getUserResult;
     
-    $response = $getUserResult;
-    
-    echo $response;
+    echo json_encode($response);
 } else {
     $response["code"] = "401";
-    $response["status"] = "Unauthorized";
+    $response["status"] = false;
     $response["messages"] = "Silahkan login";
 
     echo json_encode($response);
@@ -58,7 +58,7 @@ function getUser($email ,$conn) {
     $result = $conn->query($sql1);
 
     if($result->num_rows > 0) {
-        return json_encode($result->fetch_assoc());
+        return $result->fetch_assoc();
     } else {
         echo "Data tidak ditemukan";
         return;
