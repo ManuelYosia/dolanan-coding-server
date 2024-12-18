@@ -1,7 +1,9 @@
 <?php
 include_once "../config.php";
-
 session_start();
+header(
+    'Access-Control-Allow-Origin: *'
+);
 
 if(!isset($_GET['accessToken'])) {
     $accessToken = "";
@@ -20,8 +22,8 @@ if(!isset($_GET['email'])) {
 }
 
 $response = [];
-
-if($accessToken === session_id()) {
+//TODO: Fix session
+/*if($accessToken === session_id()) {
     $getUserResult = getUser($email, $conn);
     $response["status"] = true;
     $response["data"] = $getUserResult;
@@ -31,6 +33,24 @@ if($accessToken === session_id()) {
     $response["code"] = "401";
     $response["status"] = false;
     $response["messages"] = "Silahkan login";
+    $response["accessToken"] = $accessToken;
+    $response["currentToken"] = session_id();
+
+    echo json_encode($response);
+}*/
+
+if($accessToken !== "") {
+    $getUserResult = getUser($email, $conn);
+    $response["status"] = true;
+    $response["data"] = $getUserResult;
+    
+    echo json_encode($response);
+} else {
+    $response["code"] = "401";
+    $response["status"] = false;
+    $response["messages"] = "Silahkan login";
+    $response["accessToken"] = $accessToken;
+    $response["currentToken"] = session_id();
 
     echo json_encode($response);
 }

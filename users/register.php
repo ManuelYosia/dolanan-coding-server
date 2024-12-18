@@ -1,6 +1,10 @@
 <?php
-
+session_start();
 include_once "../config.php";
+
+header(
+    'Access-Control-Allow-Origin: *'
+);
 
 if(!isset($_POST['namaDepan'])) {
     $namaDepan = "";
@@ -78,10 +82,10 @@ function register($namaDepan, $namaBelakang, $username, $email, $password, $conn
                 }
             }
         } else {
-            $sql2 = "INSERT INTO users(username, email, password, nama_depan, nama_belakang, poin, level, map) VALUES ('{$username}','{$email}','{$password}','{$namaDepan}','{$namaBelakang}', 0, 1, 1)";
+            $sql2 = "INSERT INTO users(username, email, password, nama_depan, nama_belakang, stars, level, map) VALUES ('{$username}','{$email}','{$password}','{$namaDepan}','{$namaBelakang}', 0, 1, 1)";
         
             if($conn->query($sql2) === true) {
-                $response["status"] = "success";
+                $response["status"] = "true";
 
                 
             } else {

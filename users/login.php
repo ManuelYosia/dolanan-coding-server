@@ -2,6 +2,10 @@
 
 include_once "../config.php";
 
+header(
+    'Access-Control-Allow-Origin: *'
+);
+
 if(!isset($_POST['email'])) {
     $email = "";
 } else {
@@ -48,7 +52,7 @@ function login($email, $password, $conn) {
             // Memulai sesi dan memberikan token untuk akses
             $accessToken = startSession();
             $response = $validateFormResult;
-
+            
             $response["accessToken"] = $accessToken; 
             $response["email"] = $email;
 
