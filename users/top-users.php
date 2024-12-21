@@ -11,7 +11,7 @@ header(
 
 function getTopUsers( $conn) {
     $response = [];
-    $sql1 = "SELECT * FROM users WHERE stars > 0 ORDER BY stars DESC  LIMIT 10";
+    $sql1 = "SELECT username FROM users WHERE stars > 0 ORDER BY stars DESC  LIMIT 10";
 
     $result = $conn->query($sql1);
 
